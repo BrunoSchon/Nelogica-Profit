@@ -42,3 +42,36 @@ Begin
   
 
 End;
+//=================================================================================================//
+Inicio
+  Se (didiIndex(8,0,3,0,20,0)|0| > didiIndex(8,0,3,0,20,0)|1|) e (DiPDiM(8)|0| > DiPDiM(8)|1|) e (Fechamento[1] < Fechamento[2]) e (fechamento > maxima[1])então
+    PaintBar(clAzulClaro)
+  Senão Se (didiIndex(8,0,3,0,20,0)|0| < didiIndex(8,0,3,0,20,0)|1|) e (DiPDiM(8)|0| < DiPDiM(8)|1|) e (Fechamento[1] > Fechamento[2]) e (fechamento < minima[1]) então
+    PaintBar(clFúcsia)
+   Senão Se (didiIndex(8,0,3,0,20,0)|0| > 0) e (Fechamento > mediaexp(21,close)) entao
+     PaintBar(ClAzul)
+   Senao Se (didiIndex(8,0,3,0,20,0)|0| < 0) e (Fechamento < mediaexp(21,close)) entao
+     PaintBar(ClVermelho);
+Fim;
+
+//=================================================================================================//
+
+Inicio
+  Se (IsSold) então
+    Inicio
+      Se (fechamento > hiloActivator(3)[1])  então
+        BuyToCoverAtMarket;
+    Fim
+  Senão Se (IsBought) então
+    Inicio
+      Se (fechamento < hiloActivator(3)[1]) então
+        SellToCoverAtMarket;
+    Fim
+  Senão
+    Inicio
+      Se (didiIndex(8,0,3,0,20,0)|0| > 0) e (Fechamento > mediaexp(21,close)) então
+        BuyAtMarket
+      Senão Se(didiIndex(8,0,3,0,20,0)|0| < 0) e (Fechamento < mediaexp(21,close)) então
+        SellShortAtMarket;
+    Fim;
+Fim;
