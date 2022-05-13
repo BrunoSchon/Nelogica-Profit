@@ -1,0 +1,44 @@
+// ADX SIMPLE
+Inicio
+  Se (adx(8,8) > 17) e (adx(8,8) > adx(8,8)[1]) então
+    PaintBar(clCinza) 
+   ;
+Fim;
+//=================================================================================================//
+
+//Para dolar
+Inicio
+  Se (didiIndex(8,0,3,0,20,0)|0| > 0) e (Fechamento > mediaexp(21,Close)) então
+    PaintBar(ClAzul)
+  Senão Se (didiIndex(8,0,3,0,20,0)|0| < 0) e (Fechamento < mediaexp(21,Close)) então
+    PaintBar(ClVermelho)
+ 
+  Senão
+    PaintBar(clBranco);
+Fim;
+//=================================================================================================//
+//Para dolar2
+Inicio
+  Se (ADX(8,8) > ADX(8,8)[1]) e (DIDIIndex(8,0,3,0,20,0)|0| > 0) e (Fechamento > MEDIAEXP(21,Close)) então
+    PaintBar(clAzulClaro)
+  Senão Se (DIDIIndex(8,0,3,0,20,0)|0| > 0) e (Fechamento > MEDIAEXP(21,Close)) então
+    PaintBar(clAzul)
+  Senão Se (DIDIIndex(8,0,3,0,20,0)|0| < 0) e (Fechamento < MEDIAEXP(21,Close)) e (ADX(8,8) > ADX(8,8)[1]) então
+    PaintBar(clFúcsia)
+  Senão Se (DIDIIndex(8,0,3,0,20,0)|0| < 0) e (Fechamento < MEDIAEXP(21,Close)) então
+    PaintBar(clVermelho);
+Fim;
+
+//=================================================================================================//
+// Qualquer media. Só mudar o nº
+
+Begin
+ If (Close > mediaexp(21,close)) e (mediaexp(21,close) > mediaexp(21,close)[1]) 
+  Then PaintBar(ClAzul);
+
+  If (Close < mediaexp(21,close)) e ( mediaexp(21,close) < mediaexp(21,close)[1])
+    Then PaintBar(ClVermelho);
+
+  
+
+End;
